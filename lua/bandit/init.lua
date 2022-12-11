@@ -25,7 +25,15 @@ M.commit = function()
 		prompt = "❯ ",
 		on_submit = function(value)
 			local clean_value = value:gsub('"', '\\"')
-			vim.cmd('Git ca "' .. clean_value .. '"')
+
+			-- If the value starts with `/` don't add files before committing
+			if clean_value:sub(1, 1) == "/" then
+				clean_value = clean_value.sub(2)
+			else
+				vim.cmd("Git add -A")
+			end
+
+			vim.cmd('Git commit -m "' .. clean_value .. '"')
 		end,
 	})
 

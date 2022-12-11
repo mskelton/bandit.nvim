@@ -29,10 +29,13 @@ M.commit = function()
 		end,
 	})
 
-	input:mount()
-	input:on(event.BufLeave, function()
+	local function unmount()
 		input:unmount()
-	end)
+	end
+
+	input:map("i", "<esc>", unmount)
+	input:mount()
+	input:on(event.BufLeave, unmount)
 end
 
 return M

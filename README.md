@@ -31,7 +31,7 @@ require("bandit").commit()
 Available quick flags that can be prepended to the commit message. These flags
 will be stripped from the commit message.
 
-- `?` - Only commit changes to tracked files
-- `.` - Only commit staged changes
+- `t/` - Only commit changes to tracked files
+- `s/` - Only commit staged changes
 
 ### Creating branches

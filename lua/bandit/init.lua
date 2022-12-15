@@ -25,18 +25,17 @@ M.commit = function()
 		prompt = "❯ ",
 		on_submit = function(value)
 			local clean_value = value:gsub('"', '\\"')
-			local first = clean_value:sub(1, 1)
+			local operation = clean_value:sub(1, 2)
 			local flags = ""
 
 			-- From the README
-			-- `?` - Only commit changes to tracked files
-			-- `.` - Only commit staged changes
-			if first == "/" then
+			-- `s/` - Only commit staged changes
+			-- `t/` - Only commit changes to tracked files
+			if operation == "s/" then
+				clean_value = string.sub(clean_value, 2)
+			elseif operation == "t/" then
 				clean_value = string.sub(clean_value, 2)
 				flags = "-a"
-			elseif first == "!" then
-				clean_value = string.sub(clean_value, 2)
-				vim.cmd("silent !git add .")
 			else
 				vim.cmd("silent !git add -A")
 			end

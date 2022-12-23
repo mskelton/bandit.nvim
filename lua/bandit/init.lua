@@ -32,9 +32,9 @@ M.commit = function()
 			-- `s/` - Only commit staged changes
 			-- `t/` - Only commit changes to tracked files
 			if operation == "s/" then
-				clean_value = string.sub(clean_value, 2)
+				clean_value = string.sub(clean_value, 3)
 			elseif operation == "t/" then
-				clean_value = string.sub(clean_value, 2)
+				clean_value = string.sub(clean_value, 3)
 				flags = "-a"
 			else
 				vim.cmd("silent !git add -A")

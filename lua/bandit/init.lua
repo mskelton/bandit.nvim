@@ -40,7 +40,7 @@ M.commit = function()
 				vim.cmd("silent !git add -A")
 			end
 
-			vim.cmd("Git commit " .. flags .. ' -m "' .. clean_value .. '"')
+			vim.cmd("silent !git commit " .. flags .. ' -m "' .. clean_value .. '"')
 		end,
 	})
 

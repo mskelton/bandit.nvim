@@ -7,13 +7,13 @@ amazing [vim-fugitive](https://github.com/tpope/vim-fugitive) plugin.
 
 ## Installation
 
-Install with your favorite package manager (`packer` in this example).
+Install with your favorite package manager (e.g. [lazy.nvim](https://github.com/folke/lazy.nvim)).
 
 ```lua
-use({
+{
   "mskelton/bandit.nvim"
-  requires = { "MunifTanjim/nui.nvim" }
-})
+  dependencies = { "MunifTanjim/nui.nvim" }
+}
 ```
 
 ## Usage
@@ -33,5 +33,3 @@ will be stripped from the commit message.
 
 - `t/` - Only commit changes to tracked files
 - `s/` - Only commit staged changes
-
-### Creating branches

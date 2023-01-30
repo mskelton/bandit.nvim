@@ -3,8 +3,6 @@ local event = require("nui.utils.autocmd").event
 
 local M = {}
 
-M.setup = function() end
-
 M.commit = function()
 	local input = Input({
 		position = "50%",

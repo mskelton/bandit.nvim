@@ -10,10 +10,7 @@ amazing [vim-fugitive](https://github.com/tpope/vim-fugitive) plugin.
 Install with your favorite package manager (e.g. [lazy.nvim](https://github.com/folke/lazy.nvim)).
 
 ```lua
-{
-  "mskelton/bandit.nvim"
-  dependencies = { "MunifTanjim/nui.nvim" }
-}
+{ "mskelton/bandit.nvim" }
 ```
 
 ## Usage

@@ -1,54 +1,29 @@
-local Input = require("nui.input")
-local event = require("nui.utils.autocmd").event
-
 local M = {}
 
 M.commit = function()
-	local input = Input({
-		position = "50%",
-		size = {
-			width = 70,
-		},
-		border = {
-			style = "rounded",
-			text = {
-				top = "Commit",
-				top_align = "center",
-			},
-		},
-		win_options = {
-			winhighlight = "Normal:FloatNC,FloatBorder:FloatBorder",
-		},
-	}, {
-		prompt = "❯ ",
-		on_submit = function(value)
-			local clean_value = value:gsub('"', '\\"')
-			local operation = clean_value:sub(1, 2)
-			local flags = ""
+	vim.ui.input({ prompt = "Enter commit message:" }, function(message)
+		if message == nil then
+			return
+		end
 
-			-- From the README
-			-- `s/` - Only commit staged changes
-			-- `t/` - Only commit changes to tracked files
-			if operation == "s/" then
-				clean_value = string.sub(clean_value, 3)
-			elseif operation == "t/" then
-				clean_value = string.sub(clean_value, 3)
-				flags = "-a"
-			else
-				vim.cmd("silent !git add -A")
-			end
+		local clean_message = message:gsub('"', '\\"')
+		local operation = clean_message:sub(1, 2)
+		local flags = ""
 
-			vim.cmd("silent !git commit " .. flags .. ' -m "' .. clean_value .. '"')
-		end,
-	})
+		-- From the README
+		-- `s/` - Only commit staged changes
+		-- `t/` - Only commit changes to tracked files
+		if operation == "s/" then
+			clean_message = string.sub(clean_message, 3)
+		elseif operation == "t/" then
+			clean_message = string.sub(clean_message, 3)
+			flags = "-a"
+		else
+			vim.cmd("silent !git add -A")
+		end
 
-	local function unmount()
-		input:unmount()
-	end
-
-	input:map("i", "<esc>", unmount)
-	input:mount()
-	input:on(event.BufLeave, unmount)
+		vim.cmd("silent !git commit " .. flags .. ' -m "' .. clean_message .. '"')
+	end)
 end
 
 return M

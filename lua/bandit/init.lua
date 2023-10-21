@@ -1,7 +1,7 @@
 local M = {}
 
 M.commit = function()
-	vim.ui.input({ prompt = "Enter commit message:" }, function(message)
+	vim.ui.input({ prompt = "Enter commit message: " }, function(message)
 		if message == nil then
 			return
 		end
